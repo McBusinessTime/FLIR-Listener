@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Runtime/Landscape/Classes/LandscapeComponent.h"
 #include "Runtime/Landscape/Classes/Landscape.h"
 #include "FlirLandscapeManager.generated.h"
 
@@ -30,4 +31,6 @@ public:
 private:
 
 	ALandscape* _flirLandscape;
+
+	TArray<UMaterialInstanceDynamic*> _dynMaterialInstances;
 };

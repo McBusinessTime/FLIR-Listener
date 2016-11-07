@@ -31,6 +31,7 @@ void AFlirLandscapeManager::ChangeMaterialToDynamic()
 {
 	UE_LOG(FlirListenerLog, Log, TEXT("Changing Material Interface!"));
 	ALandscape* land = nullptr;
+	_dynMaterialInstances = TArray<UMaterialInstanceDynamic*>();
 
 	for (TActorIterator<ALandscape> Itr(GetWorld()); Itr; ++Itr)
 	{
@@ -41,11 +42,19 @@ void AFlirLandscapeManager::ChangeMaterialToDynamic()
 		{
 			UE_LOG(FlirListenerLog, Log, TEXT("Big ol' booty!"));
 			_flirLandscape = land;
-			//TArray<ULandscapeComponent*> landscapeComponents = land->LandscapeComponents;
+			TArray<ULandscapeComponent*> landscapeComponents = land->LandscapeComponents;
+			for (auto& landComp : landscapeComponents)
+			{
+				
+				UMaterialInstanceDynamic* dynMat =  landComp->CreateDynamicMaterialInstance(0, landComp->GetMaterial(0));
+				_dynMaterialInstances.Add(dynMat);
+				//UMaterialInstanceDynamic* dynMat = UMaterialInstanceDynamic::Create(landComp->GetMaterial(0), null);
+				UE_LOG(FlirListenerLog, Log, TEXT("%s"), *(dynMat->GetFName().ToString()));
+			}
 			//UMaterialInterface* landscapeMaterial = land->LandscapeMaterial;
 			//ALandscape* scape = land->GetLandscapeActor();
 			//UMaterialInstanceDynamic* dynMat = UMaterialInstanceDynamic::Create(landscapeMaterial, (ALandscapeProxy*)scape);
-			//FName name = landscapeMaterial->GetFName();
+			UE_LOG(FlirListenerLog, Log, TEXT("Big ol' booty 2!"));
 		}
 	}
 }
