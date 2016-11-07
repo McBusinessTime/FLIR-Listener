@@ -63,4 +63,9 @@ void AFlirLandscapeManager::ChangeMaterialToDynamic()
 void AFlirLandscapeManager::ToggleFlirLandscape()
 {
 	UE_LOG(FlirListenerLog, Log, TEXT("Toggle FLIR Landscape!"));
+
+	for (auto& dynMat : _dynMaterialInstances)
+	{
+		dynMat->set
+	}
 }
